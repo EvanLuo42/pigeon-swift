@@ -6,10 +6,26 @@ final class ChannelsHandler: ChannelInboundHandler {
     private var channels: [String: any Channel] = [:]
 
     func channelActive(context: ChannelHandlerContext) {
-        channels[context.channel.localAddress!.ipAddress!] = context.channel
+        guard let address = context.channel.remoteAddress else {
+            context.close(promise: nil)
+            return
+        }
+        guard let ip = address.ipAddress, let port = address.port else {
+            context.close(promise: nil)
+            return
+        }
+        channels["\(ip):\(port)"] = context.channel
     }
 
     func channelInactive(context: ChannelHandlerContext) {
-        channels[context.channel.localAddress!.ipAddress!] = nil
+        guard let address = context.channel.remoteAddress else {
+            context.close(promise: nil)
+            return
+        }
+        guard let ip = address.ipAddress, let port = address.port else {
+            context.close(promise: nil)
+            return
+        }
+        channels["\(ip):\(port)"] = nil
     }
 }

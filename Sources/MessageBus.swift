@@ -8,9 +8,9 @@ class MessageBus {
 
     func register<T: Message>(listener: @escaping (String, T) -> Void) {
         let messageName = String(describing: type(of: T.self))
-        let wrappedListener: (String, Any) -> Void = { ip, message in
+        let wrappedListener: (String, Any) -> Void = { address, message in
             if let message = message as? T {
-                listener(ip, message)
+                listener(address, message)
             }
         }
 
@@ -20,10 +20,10 @@ class MessageBus {
         listeners[messageName]?.append(wrappedListener)
     }
 
-    func post<T: Message>(ip: String, message: T) {
+    func post<T: Message>(address: String, message: T) {
         listeners[String(describing: type(of: T.self))]?.forEach { listener in
             DispatchQueue.ecs.sync {
-                listener(ip, message)
+                listener(address, message)
             }
         }
     }

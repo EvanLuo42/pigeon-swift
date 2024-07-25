@@ -5,7 +5,8 @@ class TestSystem {
         MessageBus.shared.register(listener: handleHelloWorld)
     }
 
-    func handleHelloWorld(ip: String, message: HelloWorld) {
+    func handleHelloWorld(address: String, message: HelloWorld) {
+        print(address)
         print(message.value)
     }
 }
