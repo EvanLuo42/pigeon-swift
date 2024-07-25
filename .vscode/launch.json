@@ -1,0 +1,52 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:Pigeon}",
+            "name": "Debug Pigeon",
+            "program": "${workspaceFolder:Pigeon}/.build/debug/Pigeon",
+            "preLaunchTask": "swift: Build Debug Pigeon"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:Pigeon}",
+            "name": "Release Pigeon",
+            "program": "${workspaceFolder:Pigeon}/.build/release/Pigeon",
+            "preLaunchTask": "swift: Build Release Pigeon"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:Pigeon}",
+            "name": "Debug pigeon",
+            "program": "${workspaceFolder:Pigeon}/.build/debug/pigeon",
+            "preLaunchTask": "swift: Build Debug pigeon"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:Pigeon}",
+            "name": "Release pigeon",
+            "program": "${workspaceFolder:Pigeon}/.build/release/pigeon",
+            "preLaunchTask": "swift: Build Release pigeon"
+        }
+    ]
+}
