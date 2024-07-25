@@ -6,6 +6,6 @@ final class EventHandler: ChannelInboundHandler {
 
     func channelRead(context: ChannelHandlerContext, data: NIOAny) {
         let proto = self.unwrapInboundIn(data)
-        MessageBus.shared.post(message: proto)
+        MessageBus.shared.post(ip: context.channel.localAddress!.ipAddress!, message: proto)
     }
 }

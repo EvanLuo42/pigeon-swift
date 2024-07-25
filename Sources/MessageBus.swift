@@ -4,13 +4,13 @@ import Dispatch
 class MessageBus {
     static let shared = MessageBus()
 
-    private var listeners: [String: [(Message) -> Void]] = [:]
+    private var listeners: [String: [(String, Message) -> Void]] = [:]
 
-    func register<T: Message>(listener: @escaping (T) -> Void) {
+    func register<T: Message>(listener: @escaping (String, T) -> Void) {
         let messageName = String(describing: type(of: T.self))
-        let wrappedListener: (Any) -> Void = { message in
+        let wrappedListener: (String, Any) -> Void = { ip, message in
             if let message = message as? T {
-                listener(message)
+                listener(ip, message)
             }
         }
 
@@ -20,10 +20,10 @@ class MessageBus {
         listeners[messageName]?.append(wrappedListener)
     }
 
-    func post<T: Message>(message: T) {
+    func post<T: Message>(ip: String, message: T) {
         listeners[String(describing: type(of: T.self))]?.forEach { listener in
             DispatchQueue.ecs.sync {
-                listener(message)
+                listener(ip, message)
             }
         }
     }

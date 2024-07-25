@@ -9,6 +9,7 @@ let bootstrap = ServerBootstrap(group: group)
     .serverChannelOption(ChannelOptions.socketOption(.so_reuseaddr), value: 1)
     .childChannelInitializer { channel in
         channel.pipeline.addHandlers([
+            ChannelsHandler(),
             ByteToMessageHandler(ProtobufDecoder()),
             EventHandler()])
     }

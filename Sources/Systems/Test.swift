@@ -2,10 +2,10 @@ import FirebladeECS
 
 class TestSystem {
     init() {
-        MessageBus.shared.register(listener: handleHelloWorld(message:))
+        MessageBus.shared.register(listener: handleHelloWorld)
     }
 
-    func handleHelloWorld(message: HelloWorld) {
+    func handleHelloWorld(ip: String, message: HelloWorld) {
         print(message.value)
     }
 }
